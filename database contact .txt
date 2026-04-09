@@ -1,0 +1,29 @@
+ Database: `tp5_contacts`
+--
+CREATE DATABASE IF NOT EXISTS `tp5_contacts` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `tp5_contacts`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `ID_CONTACT` int(11) NOT NULL,
+  `FIRSTNAME` varchar(255) DEFAULT NULL,
+  `LASTNAME` varchar(255) DEFAULT NULL,
+  `EMAIL` varchar(255) DEFAULT NULL,
+  `PHONE` varchar(255) DEFAULT NULL,
+  `ADDRESS` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`ID_CONTACT`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PHONE`, `ADDRESS`) VALUES
+(1, 'Khadija', 'yaakoub', 'khadija.yaakoub@email.com', '0612345678', 'Casablanca, Maroc'),
+(2, 'salah', 'rachid', 'salah.rachid@email.com', '0698765432', 'Agadir, Maroc'),
+(3, 'badreddine', 'ennajar', 'badreddine.ennajar@email.com', '0712345678', 'Benguerir, Maroc'),
+(4, 'khaoula', 'amellal', 'khaoula.amellal@gmail.com', '0635287421', 'Marrakech, Maroc');
