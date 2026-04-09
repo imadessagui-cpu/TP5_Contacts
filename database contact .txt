@@ -23,7 +23,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`ID_CONTACT`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PHONE`, `ADDRESS`) VALUES
-(1, 'Khadija', 'yaakoub', 'khadija.yaakoub@email.com', '0612345678', 'Casablanca, Maroc'),
-(2, 'salah', 'rachid', 'salah.rachid@email.com', '0698765432', 'Agadir, Maroc'),
-(3, 'badreddine', 'ennajar', 'badreddine.ennajar@email.com', '0712345678', 'Benguerir, Maroc'),
-(4, 'khaoula', 'amellal', 'khaoula.amellal@gmail.com', '0635287421', 'Marrakech, Maroc');
+(1, 'sara', 'benjalon', 'sara.benjalon@email.com', '0611223344', 'Casablanca, Maroc'),
+(2, 'said', 'farhi', 'said.farhi@email.com', '0698765432', 'Casablanca, Maroc'),
+(3, 'jamila', 'houda', 'jamila.houda@email.com', '0612345678', 'fes, Maroc'),
+(4, 'gaber', 'hamza', 'gaber.hamza@gmail.com', '0622774978', 'Marrakech, Maroc');
