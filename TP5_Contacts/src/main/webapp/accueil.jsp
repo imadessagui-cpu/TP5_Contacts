@@ -1,62 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Contacts</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .menu {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .menu a {
-            margin: 0 10px;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .menu a:hover {
-            background-color: #45a049;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .action-links a {
-            margin: 0 5px;
-            color: #2196F3;
-            text-decoration: none;
-        }
-        .action-links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 40px;
+        
+
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+    
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+   
+    .menu {
+        display: flex;
+        justify-content: center; 
+        gap: 15px; 
+        flex-wrap: wrap; 
+        margin-bottom: 40px;
+    }
+
+    .menu a {
+        padding: 12px 25px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px; 
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border: none;
+    }
+
+    .menu a:hover {
+        background-color: #2980b9;
+        transform: translateY(-3px); 
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+   
+    .menu a[href*="create"] { background-color: #2ecc71; } 
+    .menu a[href*="delete"] { background-color: #e74c3c; } 
+    .menu a[href*="update"] { background-color: #f39c12; } 
+    .menu a[href*="search"] { background-color: #9b59b6; } 
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    th {
+        background-color: #2c3e50;
+        color: white;
+        padding: 18px;
+        font-size: 15px;
+    }
+
+    td {
+        padding: 15px;
+        border-bottom: 1px solid #f1f1f1;
+        text-align: center;
+    }
+
+    tr:last-child td { border-bottom: none; }
+</style>
 </head>
 <body>
     <h1>Gestion des Contacts</h1>
