@@ -53,7 +53,7 @@ Note : Le script utilise AUTO_INCREMENT pour la gestion automatique des identifi
 
     Déployez le projet sur un serveur Apache Tomcat.
 
-    Accédez à l'application via l'URL : http://localhost:8080/TP5_Contacts/ControllerServlet.
+    Accédez à l'application via l'URL : http://localhost:8080/contact-app/ControllerServlet.
 
 📂 Structure du Projet
 
