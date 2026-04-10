@@ -3,75 +3,76 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebServlet;
 
 import model.Contact;
 import model.ContactFacade;
 
+/**
+ * Servlet implementation class ControllerServlet
+ 
+ */
+@WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
-    
+    private static final long serialVersionUID = 1L;
     private ContactFacade contactFacade;
     
     public ControllerServlet() {
         super();
     }
     
+    @Override
     public void init(ServletConfig config) throws ServletException {
-        System.out.println("*** initializing controller servlet.");
+        System.out.println("*** Initializing Controller Servlet...");
         super.init(config);
+         
         contactFacade = new ContactFacade();
     }
     
-    protected void doGet(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+      
         doPost(request, response);
     }
     
-    protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         
-        // recuperation de l'action à effectuer
+        
         String do_this = request.getParameter("do_this");
         
+       
         if (do_this == null) {
-            // definir le contexte pour une redirection sur la page accueil.jsp
-            ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/accueil.jsp");
-            // charger la liste des contacts dans la requête pour les
-            // transmettre à la JSP accueil.jsp (qui va les afficher)
             request.setAttribute("listContacts", contactFacade.findAll());
-            rd.forward(request, response);
+            request.getRequestDispatcher("/accueil.jsp").forward(request, response);
         }
+        
+        
         else if (do_this.equals("delete")) {
-            // recuperation de l'id du contact
             String idStr = request.getParameter("contact_id");
             if (idStr == null || idStr.isEmpty()) {
-                // redirection sur la page removeContact.jsp
                 response.sendRedirect("removeContact.jsp");
-            }
-            else {
-                // id non null, donc on supprime le contact identifié par id
-                int id = Integer.parseInt(idStr);
-                contactFacade.deleteContact(id);
-                // on recharge la page d'accueil
+            } else {
+                contactFacade.deleteContact(Integer.parseInt(idStr));
                 response.sendRedirect("ControllerServlet");
             }
         }
+        
+        
         else if (do_this.equals("create")) {
-            // recuperation du nom contact
             String lastName = request.getParameter("lastName");
             if (lastName == null || lastName.isEmpty()) {
-                // redirection sur la page addContact.jsp
                 response.sendRedirect("addContact.jsp");
-            }
-            else {
-                // le nom n'est pas nul, donc on ajoute le contact dans la base
+            } else {
                 Contact contact = new Contact();
                 contact.setFirstName(request.getParameter("firstName"));
                 contact.setLastName(lastName);
@@ -80,31 +81,25 @@ public class ControllerServlet extends HttpServlet {
                 contact.setAddress(request.getParameter("address"));
                 
                 contactFacade.createContact(contact);
-                // on recharge la page d'accueil
                 response.sendRedirect("ControllerServlet");
             }
         }
+        
+        
         else if (do_this.equals("update")) {
             String idStr = request.getParameter("id");
-            
             if (idStr == null || idStr.isEmpty()) {
-                // If no ID, show update form with contact data
                 String contactId = request.getParameter("contact_id");
                 if (contactId != null && !contactId.isEmpty()) {
-                    int id = Integer.parseInt(contactId);
-                    Contact contact = contactFacade.findById(id);
+                    Contact contact = contactFacade.findById(Integer.parseInt(contactId));
                     request.setAttribute("contact", contact);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/updateContact.jsp");
-                    rd.forward(request, response);
+                    request.getRequestDispatcher("/updateContact.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("updateContact.jsp");
                 }
-            }
-            else {
-                // Update the contact
-                int id = Integer.parseInt(idStr);
+            } else {
                 Contact contact = new Contact();
-                contact.setId(id);
+                contact.setId(Integer.parseInt(idStr));
                 contact.setFirstName(request.getParameter("firstName"));
                 contact.setLastName(request.getParameter("lastName"));
                 contact.setEmail(request.getParameter("email"));
@@ -112,24 +107,20 @@ public class ControllerServlet extends HttpServlet {
                 contact.setAddress(request.getParameter("address"));
                 
                 contactFacade.updateContact(contact);
-                // on recharge la page d'accueil
                 response.sendRedirect("ControllerServlet");
             }
         }
+        
+       
         else if (do_this.equals("search")) {
             String keyword = request.getParameter("keyword");
-            
             if (keyword == null || keyword.isEmpty()) {
-                // Show search form
                 response.sendRedirect("searchContact.jsp");
-            }
-            else {
-                // Perform search
+            } else {
                 List<Contact> results = contactFacade.searchContacts(keyword);
                 request.setAttribute("searchResults", results);
                 request.setAttribute("searchKeyword", keyword);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/searchContact.jsp");
-                rd.forward(request, response);
+                request.getRequestDispatcher("/searchContact.jsp").forward(request, response);
             }
         }
     }
