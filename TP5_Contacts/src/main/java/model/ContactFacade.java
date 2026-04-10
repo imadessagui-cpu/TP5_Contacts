@@ -9,7 +9,7 @@ public class ContactFacade {
     // Database connection parameters - Update these with your MySQL credentials
     private static final String URL = "jdbc:mysql://localhost:3306/tp5_contacts?useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";  // Change to your MySQL username
-    private static final String PASSWORD = "";      // Change to your MySQL password
+    private static final String PASSWORD = "root";      // Change to your MySQL password
     
     static {
         try {
